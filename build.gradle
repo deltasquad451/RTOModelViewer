@@ -1,0 +1,147 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'edu.sc.seis.launch4j'
+
+mainClassName='com.rituals.main.Main'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'edu.sc.seis.gradle:launch4j:2.4.1'
+    }
+}
+
+repositories {
+    //This is where jme3 dependencies are stored.
+    jcenter()
+
+    mavenCentral()
+
+    maven {
+        url 'https://dl.bintray.com/jmonkeyengine/org.jmonkeyengine/'
+    }
+    maven { url "http://mvnrepository.com/artifact" }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://dl.bintray.com/stephengold/jme3utilities' }
+
+
+}
+
+ext.jmeVersion = '3.2_branch-SNAPSHOT'
+ext.lwjglVersion = "3.1.2"
+
+project(":assets") {
+    apply plugin: "java"
+
+    buildDir = rootProject.file("build/assets")
+
+    sourceSets {
+        main {
+            resources {
+                srcDir '.'
+            }
+        }
+    }
+}
+
+
+dependencies {
+
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'org.slf4j:slf4j-simple:1.7.21'
+// https://mvnrepository.com/artifact/com.google.code.gson/gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.1'
+
+    // jME
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-core:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-effects:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-bullet:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-bullet-native:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-lwjgl3:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-desktop:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-terrain:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-plugins:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-effects:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-blender:$jmeVersion"
+//    compile "com.github.JavaSaBr.jmonkeyengine:jme3-jogg:$jmeVersion"
+
+    compile 'org.bitbucket.JavaSabr:jme3-jfx:-SNAPSHOT'
+    compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
+    compile 'com.github.JavaSaBr:RLib:6.3.3'
+
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    runtime project(':assets')
+    // LWJGL
+    compile "org.lwjgl:lwjgl:${lwjglVersion}"
+    compile "org.lwjgl:lwjgl-glfw:${lwjglVersion}"
+    compile "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}"
+    compile "org.lwjgl:lwjgl-openal:${lwjglVersion}"
+    compile "org.lwjgl:lwjgl-opencl:${lwjglVersion}"
+    compile "org.lwjgl:lwjgl-opengl:${lwjglVersion}"
+    compile "org.lwjgl:lwjgl-stb:${lwjglVersion}"
+    runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-windows"
+    runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-linux"
+    runtime "org.lwjgl:lwjgl:${lwjglVersion}:natives-macos"
+    runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-windows"
+    runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-linux"
+    runtime "org.lwjgl:lwjgl-glfw:${lwjglVersion}:natives-macos"
+    runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-windows"
+    runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-linux"
+    runtime "org.lwjgl:lwjgl-jemalloc:${lwjglVersion}:natives-macos"
+    runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-windows"
+    runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-linux"
+    runtime "org.lwjgl:lwjgl-openal:${lwjglVersion}:natives-macos"
+    runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-windows"
+    runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-linux"
+    runtime "org.lwjgl:lwjgl-opengl:${lwjglVersion}:natives-macos"
+    runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-windows"
+    runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-linux"
+    runtime "org.lwjgl:lwjgl-stb:${lwjglVersion}:natives-macos"
+
+    // from stephengold's bintray repositories:
+    compile 'jme3utilities:jme3-utilities-heart:0.9.19'
+    compile 'jme3utilities:jme3-utilities-debug:0.7.4'
+    compile 'jme3utilities:Wes:0.2.3'
+}
+
+task wrapper(type: Wrapper) {
+}
+
+task createDirs << {
+
+    def pkg = 'mygame'
+    def dirs = [
+        file("./src/main/java/$pkg"),
+        file("./src/main/resources"),
+        file("./assets/Interface"),
+        file("./assets/MatDefs"),
+        file("./assets/Materials"),
+        file("./assets/Models"),
+        file("./assets/Scenes"),
+        file("./assets/Shaders"),
+        file("./assets/Sounds"),
+        file("./assets/Textures"),
+    ]
+
+    dirs.each {
+        if( !it.exists() ) {
+            println "Creating " + it
+            it.mkdirs()
+        }
+        if( it.listFiles().length == 0 ) {
+            def stub = new File(it, 'removeme.txt')
+            println "Creating stub file to allow git checkin, file:$stub"
+            stub.text = "Remove me when there are files here."
+        }
+    }
+
+}
+
+launch4j{
+    mainClassName = 'com.rituals.main.Main'
+}

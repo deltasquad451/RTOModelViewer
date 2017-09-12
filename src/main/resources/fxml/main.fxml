@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="rootNode" minHeight="600" minWidth="800" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="newItem" mnemonicParsing="false" text="New Item" />
+                  <MenuItem fx:id="loadItem" mnemonicParsing="false" text="Load Item" />
+                  <MenuItem fx:id="baseModelSelect" mnemonicParsing="false" onAction="#loadBaseModel" text="Base Model" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+              <MenuItem fx:id="closeApplication" mnemonicParsing="false" onAction="#closeApp" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <StackPane fx:id="imageViewStackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="jmeImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" />
+         </children>
+      </StackPane>
+   </center>
+   <left>
+      <AnchorPane fx:id="sideAnchorPane" style="-fx-background-color: #494949;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+         <children>
+            <Accordion AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+              <panes>
+                <TitledPane animated="false" text="Bones">
+                     <content>
+                        <ListView fx:id="boneList" prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Animations">
+                     <content>
+                        <ListView fx:id="animationsList" prefHeight="200.0" prefWidth="200.0" />
+                     </content>
+                </TitledPane>
+                  <TitledPane prefHeight="200.0" prefWidth="200.0" text="Item Atributes">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="100.0" />
+                     </content>
+                  </TitledPane>
+              </panes>
+            </Accordion>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>
