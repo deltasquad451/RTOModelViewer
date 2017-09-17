@@ -3,9 +3,12 @@ package com.rituals.main.controllers;
 
 import com.rituals.main.JMEApp;
 import com.rituals.main.controllers.utils.DragResizerXY;
+import com.rituals.main.model.itemBoneProperties;
 import com.rituals.main.model.itemProperties;
 import io.datafx.controller.ViewController;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,10 +66,23 @@ public class MainController implements Initializable{
     private ListView<?> animationsList;
 
     @FXML
-    private ListView<?> itemLayoutList;
+    private ListView<itemBoneProperties> itemLayoutList;
 
     @FXML
     private Button addNewItemLayout;
+
+    static ObservableList<itemBoneProperties> itemObservableList = FXCollections.observableArrayList();
+
+    static {
+        itemObservableList.addAll(new itemBoneProperties("Bone1",1,1,1,2,2,2,3,3,3),
+                new itemBoneProperties("Bone2",1,1,1,2,2,2,3,3,3),
+                new itemBoneProperties("Bone3",1,1,1,2,2,2,3,3,3),
+                new itemBoneProperties("Bone4",1,1,1,2,2,2,3,3,3),
+                new itemBoneProperties("Bone5",1,1,1,2,2,2,3,3,3),
+                new itemBoneProperties("Bone6",1,1,1,2,2,2,3,3,3),
+                new itemBoneProperties("Bone7",1,1,1,2,2,2,3,3,3),
+                new itemBoneProperties("Bone8",1,1,1,2,2,2,3,3,3));
+    }
 
     private File itemModel = null;
     public TextField itemPath;
@@ -81,6 +97,14 @@ public class MainController implements Initializable{
         newItem.setOnAction(this::loadItemModel);
         boneList.setOnMouseClicked(this::boneListElementOnSelect);
         jmeImageView.setOnMouseEntered(this::imageViewMouseEntered);
+
+        this.itemLayoutList.setEditable(true);
+        this.itemLayoutList.setItems(itemObservableList);
+        this.itemLayoutList.setCellFactory(e -> new ItemPropViewCell());
+
+        this.itemLayoutList.setOnEditCommit(event -> {
+            System.out.println("Test");
+        });
     }
 
     public ImageView getJmeImageView() {
