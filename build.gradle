@@ -31,7 +31,7 @@ repositories {
 
 }
 
-ext.jmeVersion = '3.2_branch-SNAPSHOT'
+ext.jmeVersion = 'master-SNAPSHOT'
 ext.lwjglVersion = "3.1.2"
 
 project(":assets") {
@@ -68,6 +68,7 @@ dependencies {
 //    compile "com.github.JavaSaBr.jmonkeyengine:jme3-effects:$jmeVersion"
 //    compile "com.github.JavaSaBr.jmonkeyengine:jme3-blender:$jmeVersion"
 //    compile "com.github.JavaSaBr.jmonkeyengine:jme3-jogg:$jmeVersion"
+    compile "org.jmonkeyengine:jme3-plugins:$jmeVersion"
 
     compile 'org.bitbucket.JavaSabr:jme3-jfx:-SNAPSHOT'
     compile group: 'org.jetbrains', name: 'annotations', version: '15.0'

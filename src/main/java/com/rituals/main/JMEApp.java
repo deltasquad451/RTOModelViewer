@@ -12,6 +12,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.debug.SkeletonDebugger;
+import com.jme3.scene.plugins.gltf.GltfLoader;
 import com.jme3.scene.shape.Sphere;
 import com.jme3x.jfx.injfx.JmeToJFXApplication;
 
@@ -41,6 +42,7 @@ public class JMEApp extends JmeToJFXApplication implements AnimEventListener {
     @Override
     public void simpleInitApp(){
         super.simpleInitApp();
+
         Sphere b = new Sphere(10,10,0.03f);
         bonePointer = new Geometry("Player", b);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -56,6 +58,8 @@ public class JMEApp extends JmeToJFXApplication implements AnimEventListener {
         sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
         rootNode.addLight(sun);
 
+
+
     }
 
     public void addBaseModel (String path, String rootPath){
@@ -63,6 +67,7 @@ public class JMEApp extends JmeToJFXApplication implements AnimEventListener {
         if(this.baseModel != null){
             this.rootNode.detachChild(this.baseModel);
         }
+        this.assetManager.registerLoader(GltfLoader.class);
         this.assetManager.registerLocator(rootPath, FileLocator.class);
         this.baseModel = (Node)this.assetManager.loadModel(path);
 

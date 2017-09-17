@@ -3,6 +3,7 @@ package com.rituals.main.controllers;
 
 import com.rituals.main.JMEApp;
 import com.rituals.main.controllers.utils.DragResizerXY;
+import com.rituals.main.model.itemProperties;
 import io.datafx.controller.ViewController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -61,8 +62,15 @@ public class MainController implements Initializable{
     @FXML
     private ListView<?> animationsList;
 
+    @FXML
+    private ListView<?> itemLayoutList;
+
+    @FXML
+    private Button addNewItemLayout;
+
     private File itemModel = null;
-    TextField itemPath;
+    public TextField itemPath;
+    public itemProperties itemProperties;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -153,20 +161,26 @@ public class MainController implements Initializable{
                 setContent(page1Grid);
             }
 
-            @Override
-            public void onEnteringPage(Wizard wizard) {
-                wizard.invalidProperty().unbind();
-                wizard.invalidProperty().bind(vs.invalidProperty());
-            }
         };
 
+        // --- page 2
+        final WizardPane page2 = new WizardPane() {
+            @Override public void onEnteringPage(Wizard wizard) {
+                String itemName = (String) wizard.getSettings().get("ItemName");
+                String itemLoc = (String) wizard.getSettings().get("itemModelLoc");
+
+                setContentText("New item name: " + itemName + "\n Item Location: " +itemLoc);
+            }
+        };
+        page2.setHeaderText("New Item Details:");
+
         // create wizard
-        wizard.setFlow(new Wizard.LinearFlow(page1));
+        wizard.setFlow(new Wizard.LinearFlow(page1,page2));
 
         // show wizard and wait for response
         wizard.showAndWait().ifPresent(result -> {
             if (result == ButtonType.FINISH) {
-                System.out.println("Wizard finished, settings: " + wizard.getSettings());
+                System.out.println("Wizard finished, settings: " + wizard.getSettings().keySet());
             }
         });
     }

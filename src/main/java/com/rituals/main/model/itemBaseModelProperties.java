@@ -8,4 +8,8 @@ public class itemBaseModelProperties {
 
     public itemBaseModelProperties(){}
 
+    public itemBaseModelProperties(String baseModel, List<itemBoneProperties> positions) {
+        this.baseModel = baseModel;
+        this.positions = positions;
+    }
 }
