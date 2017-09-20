@@ -102,9 +102,6 @@ public class MainController implements Initializable{
         this.itemLayoutList.setItems(itemObservableList);
         this.itemLayoutList.setCellFactory(e -> new ItemPropViewCell());
 
-        this.itemLayoutList.setOnEditCommit(event -> {
-            System.out.println("Test");
-        });
     }
 
     public ImageView getJmeImageView() {

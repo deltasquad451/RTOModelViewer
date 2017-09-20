@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox fx:id="vboxRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="vboxRoot" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="176.0" spacing="2.0">
          <children>
@@ -12,36 +11,36 @@
          </children>
       </HBox>
       <Label text="Rotations:" />
-      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="176.0" spacing="5.0">
+      <HBox alignment="CENTER" prefHeight="0.0" spacing="5.0">
          <children>
             <Label text="X:" />
-            <TextField fx:id="itemRotX" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemRotX" prefHeight="25.0" prefWidth="50.0" />
             <Label text="Y:" />
-            <TextField fx:id="itemRotY" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemRotY" prefHeight="25.0" prefWidth="50.0" />
             <Label text="Z:" />
-            <TextField fx:id="itemRotZ" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemRotZ" prefHeight="25.0" prefWidth="50.0" />
          </children>
       </HBox>
       <Label text="Location" />
-      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="162.0" spacing="5.0">
+      <HBox alignment="CENTER" prefHeight="0.0" spacing="5.0">
          <children>
             <Label text="X:" />
-            <TextField fx:id="itemLocX" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemLocX" prefHeight="25.0" prefWidth="50.0" />
             <Label text="Y:" />
-            <TextField fx:id="itemLocY" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemLocY" prefHeight="25.0" prefWidth="50.0" />
             <Label text="Z:" />
-            <TextField fx:id="itemLocZ" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemLocZ" prefHeight="25.0" prefWidth="50.0" />
          </children>
       </HBox>
       <Label text="Scale" />
-      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="195.0" spacing="5.0">
+      <HBox alignment="CENTER" prefHeight="0.0" spacing="5.0">
          <children>
             <Label text="X:" />
-            <TextField fx:id="itemScaleX" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemScaleX" prefHeight="25.0" prefWidth="50.0" />
             <Label text="Y:" />
-            <TextField fx:id="itemScaleY" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemScaleY" prefHeight="25.0" prefWidth="50.0" />
             <Label text="Z:" />
-            <TextField fx:id="itemScaleZ" prefHeight="25.0" prefWidth="24.0" />
+            <TextField fx:id="itemScaleZ" prefHeight="25.0" prefWidth="50.0" />
          </children>
       </HBox>
    </children>

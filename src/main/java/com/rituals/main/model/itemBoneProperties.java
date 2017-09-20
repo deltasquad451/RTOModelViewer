@@ -28,4 +28,20 @@ public class itemBoneProperties {
         this.sizeY = sizeY;
         this.sizeZ = sizeZ;
     }
+
+    @Override
+    public String toString() {
+        return "itemBoneProperties{" +
+                "boneName='" + boneName + '\'' +
+                ", rotX=" + rotX +
+                ", rotY=" + rotY +
+                ", rotZ=" + rotZ +
+                ", locX=" + locX +
+                ", locY=" + locY +
+                ", locZ=" + locZ +
+                ", sizeX=" + sizeX +
+                ", sizeY=" + sizeY +
+                ", sizeZ=" + sizeZ +
+                '}';
+    }
 }
