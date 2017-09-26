@@ -8,6 +8,7 @@ import com.jme3.asset.plugins.FileLocator;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -15,6 +16,7 @@ import com.jme3.scene.debug.SkeletonDebugger;
 import com.jme3.scene.plugins.gltf.GltfLoader;
 import com.jme3.scene.shape.Sphere;
 import com.jme3x.jfx.injfx.JmeToJFXApplication;
+import com.rituals.main.model.itemBoneProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,8 +125,26 @@ public class JMEApp extends JmeToJFXApplication implements AnimEventListener {
     }
 
     public void loadItemModel(String path, String rootPath){
+        System.out.println(path+" "+rootPath);
+        if(this.itemModel != null){
+            Node parent = this.itemModel.getParent();
+            parent.detachChild(this.itemModel);
+        }
+        this.assetManager.registerLocator(rootPath, FileLocator.class);
+        this.itemModel = (Node)this.assetManager.loadModel(path);
+    }
 
+    public void setItemLayout(itemBoneProperties layout){
+        Node attch = this.skeletonControl.getAttachmentsNode(layout.boneName);
 
+        if(itemModel.getParent() != null){
+            Node parentAttchNode = this.itemModel.getParent();
+            parentAttchNode.detachChild(this.itemModel);
+        }
+        attch.attachChild(itemModel);
+        itemModel.setLocalTranslation(layout.locX,layout.locY,layout.locZ);
+        itemModel.setLocalScale(layout.sizeX,layout.sizeY,layout.sizeZ);
+        itemModel.setLocalRotation(new Quaternion(layout.rotX,layout.rotY,layout.locZ,layout.rotW));
     }
 
     @Override

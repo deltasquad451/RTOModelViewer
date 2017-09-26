@@ -12,7 +12,7 @@
                   <MenuItem fx:id="newItem" mnemonicParsing="false" text="New Item" />
                   <MenuItem fx:id="loadItem" mnemonicParsing="false" text="Load Item" />
                   <MenuItem fx:id="baseModelSelect" mnemonicParsing="false" onAction="#loadBaseModel" text="Base Model" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem fx:id="saveItem" disable="true" mnemonicParsing="false" text="Save" />
               <MenuItem fx:id="closeApplication" mnemonicParsing="false" onAction="#closeApp" text="Close" />
             </items>
           </Menu>

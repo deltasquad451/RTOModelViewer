@@ -1,5 +1,6 @@
 package com.rituals.main.fxProperties;
 
+import com.rituals.main.JMEApp;
 import com.rituals.main.model.itemBoneProperties;
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
@@ -7,11 +8,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ObservabeItemProp {
+
+    public itemBoneProperties properties;
+
     public final StringProperty boneName = new SimpleStringProperty();
 
     public final FloatProperty rotX = new SimpleFloatProperty(0f);
     public final FloatProperty rotY = new SimpleFloatProperty(0f);
     public final FloatProperty rotZ = new SimpleFloatProperty(0f);
+    public final FloatProperty rotW = new SimpleFloatProperty(0f);
 
     public final FloatProperty locX = new SimpleFloatProperty(0f);
     public final FloatProperty locY = new SimpleFloatProperty(0f);
@@ -22,16 +27,47 @@ public class ObservabeItemProp {
     public final FloatProperty sizeZ = new SimpleFloatProperty(0f);
 
     public ObservabeItemProp() {
-//        this.boneName.addListener(observable -> {
-//            System.out.println("TEst "+observable+" "+observable.getClass());
-//        });
-//        this.rotX.addListener((observable, oldValue, newValue) -> {
-//            System.out.println("Test");
-//        });
+        JMEApp app = JMEApp.getInstance();
+        this.boneName.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.rotX.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.rotY.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.rotZ.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.rotW.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+
+        this.locX.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.locY.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.locZ.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+
+        this.sizeX.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.sizeY.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
+        this.sizeZ.addListener((observable, oldValue, newValue) -> {
+            updatePropertyValues();
+        });
     }
 
     public ObservabeItemProp(itemBoneProperties prop){
         this();
+        this.properties = prop;
         boneName.setValue(prop.boneName);
         rotX.set(prop.rotX);
         rotY.set(prop.rotY);
@@ -46,7 +82,18 @@ public class ObservabeItemProp {
         sizeZ.set(prop.sizeZ);
     }
 
+    public void updatePropertyValues(){
+        JMEApp app = JMEApp.getInstance();
+        properties.updateValues(boneName.getValue(),rotX.getValue(),rotY.getValue(),rotZ.getValue(), rotW.getValue(),locX.getValue(),
+                locY.getValue(),locZ.getValue(),sizeX.getValue(),sizeY.getValue(),sizeZ.getValue());
+        app.setItemLayout(properties);
+    }
 
+    public itemBoneProperties toItemProp(){
+        return new itemBoneProperties(this.boneName.getValue(), this.rotX.getValue(), this.rotY.getValue(), this.rotZ.getValue(),this.rotW.getValue(),
+                this.locX.getValue(), this.locY.getValue(), this.locZ.getValue(),
+                this.sizeX.getValue(), this.sizeY.getValue(), this.sizeZ.getValue());
+    }
 
     //-----------------
     //GETTER AND SETTER

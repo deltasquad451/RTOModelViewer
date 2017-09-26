@@ -5,6 +5,7 @@ public class itemBoneProperties {
     public float rotX = 0f;
     public float rotY = 0f;
     public float rotZ = 0f;
+    public float rotW = 0f;
 
     public float locX = 0f;
     public float locY = 0f;
@@ -16,7 +17,20 @@ public class itemBoneProperties {
 
     public itemBoneProperties(){}
 
-    public itemBoneProperties(String boneName, float rotX, float rotY, float rotZ, float locX, float locY, float locZ, float sizeX, float sizeY, float sizeZ) {
+    public itemBoneProperties(String boneName, float rotX, float rotY, float rotZ, float rotW, float locX, float locY, float locZ, float sizeX, float sizeY, float sizeZ) {
+        this.boneName = boneName;
+        this.rotX = rotX;
+        this.rotY = rotY;
+        this.rotZ = rotZ;
+        this.locX = locX;
+        this.locY = locY;
+        this.locZ = locZ;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.sizeZ = sizeZ;
+    }
+
+    public void updateValues(String boneName, float rotX, float rotY, float rotZ,float rotW, float locX, float locY, float locZ, float sizeX, float sizeY, float sizeZ){
         this.boneName = boneName;
         this.rotX = rotX;
         this.rotY = rotY;

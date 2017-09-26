@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox fx:id="vboxRoot" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="vboxRoot" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="176.0" spacing="2.0">
          <children>
@@ -19,6 +19,8 @@
             <TextField fx:id="itemRotY" prefHeight="25.0" prefWidth="50.0" />
             <Label text="Z:" />
             <TextField fx:id="itemRotZ" prefHeight="25.0" prefWidth="50.0" />
+            <Label text="W:" />
+            <TextField fx:id="itemRotW" prefWidth="50.0" />
          </children>
       </HBox>
       <Label text="Location" />

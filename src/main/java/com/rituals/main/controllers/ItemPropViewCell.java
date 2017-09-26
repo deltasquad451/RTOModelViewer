@@ -37,6 +37,9 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
     private TextField itemRotZ;
 
     @FXML
+    private TextField itemRotW;
+
+    @FXML
     private TextField itemLocX;
 
     @FXML
@@ -54,6 +57,7 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
     @FXML
     private TextField itemScaleZ;
 
+
     private FXMLLoader mLLoader;
 
     private itemBoneProperties item;
@@ -64,10 +68,14 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println(item);
+    }
+
+    private void setUpConnections(){
         this.boneId.setText(item.boneName);
         itemRotX.setText(String.valueOf(item.rotX));
         itemRotY.setText(String.valueOf(item.rotY));
         itemRotZ.setText(String.valueOf(item.rotZ));
+        itemRotW.setText(String.valueOf(item.rotW));
 
         itemLocX.setText(String.valueOf(item.locX));
         itemLocY.setText(String.valueOf(item.locY));
@@ -84,6 +92,7 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
         Bindings.bindBidirectional(itemRotX.textProperty(),itemObservable.rotX, new NumberStringConverter());
         Bindings.bindBidirectional(itemRotY.textProperty(),itemObservable.rotY, new NumberStringConverter());
         Bindings.bindBidirectional(itemRotZ.textProperty(),itemObservable.rotZ, new NumberStringConverter());
+        Bindings.bindBidirectional(itemRotW.textProperty(), itemObservable.rotW, new NumberStringConverter());
 
         Bindings.bindBidirectional(itemLocX.textProperty(),itemObservable.locX, new NumberStringConverter());
         Bindings.bindBidirectional(itemLocY.textProperty(),itemObservable.locY, new NumberStringConverter());
@@ -98,6 +107,7 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
         itemRotX.setTextFormatter(floatTextFormatter(item.rotX));
         itemRotY.setTextFormatter(floatTextFormatter(item.rotY));
         itemRotZ.setTextFormatter(floatTextFormatter(item.rotZ));
+        itemRotW.setTextFormatter(floatTextFormatter(item.rotW));
 
         itemLocX.setTextFormatter(floatTextFormatter(item.locX));
         itemLocY.setTextFormatter(floatTextFormatter(item.locY));
@@ -107,7 +117,6 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
         itemScaleY.setTextFormatter(floatTextFormatter(item.sizeY));
         itemScaleZ.setTextFormatter(floatTextFormatter(item.sizeZ));
     }
-
 
     private TextFormatter<Float> floatTextFormatter(float defaultValue){
         TextFormatter<Float> textFormatter = new TextFormatter<Float>(new FloatStringConverter(), defaultValue,
@@ -119,6 +128,8 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
                 });
         return textFormatter;
     }
+
+
 
     @Override
     protected void updateItem(itemBoneProperties item, boolean empty) {
@@ -133,14 +144,15 @@ public class ItemPropViewCell extends ListCell<itemBoneProperties> implements In
                 mLLoader.setController(this);
 
                 try {
-                    this.item = item;
+
                     mLLoader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
 
                 }
             }
-
+            this.item = item;
+            setUpConnections();
             setText(null);
             setGraphic(vboxRoot);
         }
